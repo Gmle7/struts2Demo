@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+	<constant name="struts_devMode" value="true"></constant>
+	<include file="struts_cc.xml"></include>
+	<package name="myPk" namespace="/my" extends="struts-default">
+	<!-- 配置默认的action行为  错误的路径也会跳转到默认页面-->
+        <default-action-ref name="myThirdAC"></default-action-ref>
+        
+        <action name="myFirstAC" class="com.hnisc.action.MyFirstAction"> 
+        <result name="success">../WEB-INF/test.jsp</result>
+        </action>
+            
+        <action name="toLoginAC" class="com.hnisc.action.MyFirstAction" method="toLogin">
+            <result name="tologin">../WEB-INF/login.jsp</result>
+        </action>
+        
+        <!-- 通配符方法配置action 注意使用通配符方式要注意格式，由于十分抽象-->
+        <action name="*_*" class="com.hnisc.action.{1}Action">
+        	<result name="add">../WEB-INF/{2}/add.jsp</result>
+        </action>
+    </package>
+</struts>
